@@ -1,0 +1,35 @@
+services:
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       compuroom
+      POSTGRES_USER:     comuser
+      POSTGRES_PASSWORD: compuroom123
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  backend:
+    image: baramee023/compuroom-backend:latest
+    restart: unless-stopped
+    environment:
+      DB_HOST:     db
+      DB_PORT:     5432
+      DB_NAME:     compuroom
+      DB_USER:     comuser
+      DB_PASSWORD: compuroom123
+      PORT:        3001 
+    depends_on:
+      - db
+
+  frontend:
+    image: baramee023/compuroom-frontend:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  pg_data:
