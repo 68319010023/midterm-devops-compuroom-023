@@ -262,7 +262,7 @@ onMounted(fetchComputers)
 
 .app {
   --bg: #0f1419;
-  --surface: #161d27;
+  --surface: #455162;
   --surface-alt: #1d2733;
   --border: #2a3644;
   --text: #e2e8f0;
